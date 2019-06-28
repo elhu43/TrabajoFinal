@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:fragment="head">
+<meta charset="UTF-8"></meta>
+<title>WEB</title>
+<link
+	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
+	rel="stylesheet" id="bootstrap-css"></link>
+<link rel="stylesheet" th:href="@{/layout/css/sb-admin-2.min.css}"></link>
+</head>
+<body>
+
+	<header th:fragment="header">
+
+		<nav class="navbar navbar-primary bg-primary">
+
+
+			<a class="navbar-brand" th:href="@{bienvenido}"> <img
+				th:src="@{/imagenes/logo.png}" width="85" height="80"
+				class="d-inline-block align-top" alt="Logo Game Zone">
+			</a>
+
+			<div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+
+				<ul class="nav nav-pills flex-column flex-sm-row">
+					<li class="nav-item"><a class="nav-link active" href="#about"
+						th:href="@{bienvenido}"><span class="glyphicon glyphicon-home"></span>   Inicio</a></li>
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle active" data-toggle="dropdown"
+						href="#about" role="button" aria-haspopup="true"
+						aria-expanded="false"><span class="glyphicon glyphicon-cog"></span>   Gestión de Eventos</a>
+						<div class="dropdown-menu">
+							<a class="dropdown-item" href="#" th:href="@{/lineas/listar}">Línea
+								de Evento</a> <a class="dropdown-item" href="#"
+								th:href="@{/eventos/listar}">Eventos</a> <a
+								class="dropdown-item" href="#" th:href="@{/actividades/listar}">Actividades</a>
+						</div></li>
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle active" data-toggle="dropdown"
+						href="#about" role="button" aria-haspopup="true"
+						aria-expanded="false"><span class="glyphicon glyphicon-user"></span>   Gestión de Usuarios</a>
+						<div class="dropdown-menu">
+							<a class="dropdown-item" href="#" th:href="@{/usuarios/listar}">Usuarios</a>
+							<a class="dropdown-item" href="#" th:href="@{/roles/listar}">Roles</a>
+						</div></li>
+
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle active" data-toggle="dropdown"
+						href="#about" role="button" aria-haspopup="true"
+						aria-expanded="false"><span class="glyphicon glyphicon-th"></span>   Gestión de la Empresa</a>
+						<div class="dropdown-menu">
+							<a class="dropdown-item" href="#" th:href="@{/locales/listar}">Local</a>
+						</div></li>
+
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle active" data-toggle="dropdown"
+						href="#about" role="button" aria-haspopup="true"
+						aria-expanded="false"><span class="glyphicon glyphicon-log-out"></span>   Gestión de la cuenta</a>
+						<div class="dropdown-menu">
+							<form id="logoutForm" th:action="@{/logout}" method="post">
+								<a class="dropdown-item"
+									onclick="document.getElementById('logoutForm').submit();"
+									type="submit"><span class="glyphicon glyphicon-remove-circle"></span>Cerrar Sesión</a>
+							</form>
+						</div></li>
+
+				</ul>
+				
+			</div>
+		</nav>
+	</header>
+
+	<footer th:fragment="footer" class="container">
+		<p>
+			Powered by ....&copy; <a href="http://www.gamezone.com.pe"
+				target=_blank>Game Zone 2019</a>
+		</p>
+
+		<script th:src="@{/layout/vendor/jquery/jquery.min.js}"></script>
+		<script th:src="@{/layout/vendor/jquery/jquery.slim.min.js}"></script>
+		<script th:src="@{/layout/vendor/bootstrap/js/bootstrap.min.js}"></script>
+		<script
+			th:src="@{/layout/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+		<script th:src="@{/layout/vendor/bootstrap/js/jquery.easing.min.js}"></script>
+		<script th:src="@{/layout/js/sb-admin-2.min.js}"></script>
+	</footer>
+</body>
+</html>
+
+
+
