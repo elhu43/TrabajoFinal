@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<meta charset="UTF-8"></meta>
+
+<body>
+
+	<header th:replace="layout/layout :: header"></header>
+	<div class="container">
+		<div class="card bg-light">
+			<div class="card-header text-black bg-blue">Registro de Evento</div>
+			<form th:action="@{/eventos/guardar}" th:object="${evento}"
+				method="post" enctype="multipart/form-data">
+				<div class="form-group row">
+					<label for="idEvento" class="col-sm-2 col-form-label">Id</label>
+					<div class="col-sm-6">
+						<input type="text" th:field="*{idEvento}" class="form-control"
+							th:errorclass="'form-control alert-danger'" /> <small
+							class="form-text text-danger"
+							th:if="${#fields.hasErrors('idEvento')}" th:errors="*{idEvento}"></small>
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label for="nombreEvento" class="col-sm-2 col-form-label">Evento</label>
+					<div class="col-sm-6">
+						<input type="text" th:field="*{nombreEvento}" class="form-control"
+							th:errorclass="'form-control alert-danger'" /> <small
+							class="form-text text-danger"
+							th:if="${#fields.hasErrors('nombreEvento')}"
+							th:errors="*{nombreEvento}"></small>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="maximoParticipantes" class="col-sm-2 col-form-label">Maximo
+						de Participantes</label>
+					<div class="col-sm-6">
+						<input type="text" th:field="*{maximoParticipantes}"
+							class="form-control" th:errorclass="'form-control alert-danger'"
+							required="required" /> <small class="form-text text-danger"
+							th:if="${#fields.hasErrors('maximoParticipantes')}"
+							th:errors="*{maximoParticipantes}"></small>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="cantidadAsistentes" class="col-sm-2 col-form-label">Cantidad
+						de Asistentes</label>
+					<div class="col-sm-6">
+						<input type="text" th:field="*{cantidadAsistentes}"
+							class="form-control" th:errorclass="'form-control alert-danger'"
+							required="required" /> <small class="form-text text-danger"
+							th:if="${#fields.hasErrors('cantidadAsistentes')}"
+							th:errors="*{cantidadAsistentes}"></small>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="fecha" class="col-sm-2 col-form-label">Fecha</label>
+					<div class="col-sm-6">
+						<input type="date" th:field="*{fecha}" class="form-control"
+							th:errorclass="'form-control alert-danger'" /> <small
+							class="form-text text-danger"
+							th:if="${#fields.hasErrors('fecha')}" th:errors="*{fecha}"></small>
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label for="local" class=" col-sm-2 col-form-label">Local:</label>
+					<div class="col-sm-6">
+						<select class="form-control" th:field="*{local.idLocal}">
+							<option th:each="l: ${listaLocales}" th:value="${l.idLocal}"
+								th:text="${l.nombreLocal}"
+								th:selected="(${l.idLocal} == *{local.idLocal})"></option>
+						</select>
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label for="linea" class=" col-sm-2 col-form-label">Linea:</label>
+					<div class="col-sm-6">
+						<select class="form-control" th:field="*{linea.idLinea}">
+							<option th:each="li: ${listaLineas}" th:value="${li.idLinea}"
+								th:text="${li.nombreLinea}"
+								th:selected="(${li.idLinea} == *{linea.idLinea})"></option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="file" class="col-sm-2 col-form-label ">Foto:</label>
+					<div class="col-sm-6">
+						<input type="file" name="file" class="form-control"
+							th:text="${evento.foto}" required="required" />
+					</div>
+				</div>
+				<div class="form-group row">
+					<div class="col-sm-6" align="center">
+						<input type="submit" value="Registrar" class="btn btn-primary" />
+
+						<a href="/eventos/listar" class="btn btn-danger">Cancelar</a>
+					</div>
+				</div>
+				<p th:text="${mensaje}" class="form-text text-danger"></p>
+			</form>
+		</div>
+	</div>
+
+
+	<footer th:replace="layout/layout :: footer"></footer>
+
+
+</body>
+</html>

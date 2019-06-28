@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<meta charset="UTF-8"></meta>
+
+<body>
+	<header th:replace="layout/layout :: header"></header>
+	<div class="container">
+		<div class="card">
+			<div class="card-header text-white bg-dark mb-3">Reporte de
+				Usuarios</div>
+			<div class="card-body">
+
+				<div class="table-responsive">
+					<table class="table table-white">
+
+						<tbody>
+							<tr>
+								<td>CODIGO</td>
+								<td th:text="${usuario.idUsuario}"></td>
+							</tr>
+							<tr>
+								<td>Nombre</td>
+								<td th:text="${usuario.nombreUsuario}"></td>
+							</tr>
+							<tr>
+								<td>Apellidos</td>
+								<td th:text="${usuario.apellidoUsuario}"></td>
+							</tr>
+							<tr>
+								<td>DNI</td>
+								<td th:text="${usuario.dniUsuario}"></td>
+							</tr>
+							<tr>
+								<td>Username</td>
+								<td th:text="${usuario.username}"></td>
+							</tr>
+							<tr>
+								<td>Contraseña</td>
+								<td th:text="${usuario.password}"></td>
+							</tr>
+						</tbody>
+
+					</table>
+
+					<a th:href="@{/usuarios/listar}" type="button"
+						class="btn btn-primary k"> <span
+						class="glyphicon glyphicon-circle-arrow-left"></span> Volver
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

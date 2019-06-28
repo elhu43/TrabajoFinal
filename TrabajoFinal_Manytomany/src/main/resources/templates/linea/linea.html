@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<meta charset="UTF-8"></meta>
+
+<body>
+	<header th:replace="layout/layout :: header"></header>
+	<div class="container">
+		<div class="card bg-light">
+			<div class="card-header text-black bg-blue">Registro de
+				Lineas</div>
+			<form th:action="@{/lineas/guardar}" th:object="${linea}"
+				method="post">
+				<div class="form-group row">
+					<label for="idLinea" class="col-sm-2 col-form-label">Id</label>
+					<div class="col-sm-6">
+						<input type="text" th:field="*{idLinea}" class="form-control"/>
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label for="nombreLinea" class="col-sm-2 col-form-label">Linea</label>
+					<div class="col-sm-6">
+						<input type="text" th:field="*{nombreLinea}" class="form-control"
+							th:errorclass="'form-control alert-info'" /> <small						
+							th:if="${#fields.hasErrors('nombreLinea')}"
+							th:errors="*{nombreLinea}"></small>
+					</div>
+				</div>
+				
+				<div class="form-group row">
+					<label for="descripcion" class="col-sm-2 col-form-label">Descripcion</label>
+					<div class="col-sm-6">
+						<input type="text" th:field="*{descripcion}" class="form-control"
+							th:errorclass="'form-control alert-info'" /> <small						
+							th:if="${#fields.hasErrors('descripcion')}"
+							th:errors="*{descripcion}"></small>
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<div class="col-sm-6" align="center">
+						<input type="submit" value="Registrar" class="btn btn-primary" />
+					
+						<a href="/lineas/listar" class="btn btn-danger">Cancelar</a>
+					</div>
+				</div>
+				<p th:text="${mensaje}" class="form-text text-danger"></p>
+			</form>
+		</div>
+	</div>
+
+	<div th:if="${mensaje}" class="alert alert-info">
+		<p th:text="${mensaje}"></p>
+	</div>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<meta charset="UTF-8"></meta>
+
+<body>
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container">
+		<div align="right">
+			<a th:href="@{/actividades/nuevo}"
+				id="add-row" type="button" class="btn btn-warning">Nuevo</a>
+		</div>
+		<div>
+			<form th:action="@{/actividades/buscar}" method="post"
+				th:object="${actividad}">
+				<div class="form-group">
+
+					<label for="actividad">Buscar:</label> <input type="text"
+						class="form-control" th:field="*{nombreActividad}" id="actividad"></input>
+					<div align="right">
+						<button type="submit" class="btn btn-success">Aceptar</button>
+						<a href="/actividades/listar" class="btn btn-danger">Cancelar</a>
+					</div>
+				</div>
+
+			</form>
+
+		</div>
+
+		<div class="card">
+			<div class="card-header text-white bg-primary mb-3">Reporte de
+				Actividades</div>
+			<div class="card-body">
+
+				<div class="table-responsive">
+					<table class="table table-white">
+						<thead class="bg-primary mb-3 text-white">
+							<tr>
+								<th>Id</th>
+								<th>Actividad</th>
+								<th>Descripcion</th>
+								<th align="center">Operación</th>
+								<th align="center">Operación</th>
+							</tr>
+						</thead>
+						<tbody id="actividad-list">
+							<tr th:each="actividad:${listaActividades}">
+								<td><a class="btn btn-primary btn-xs"
+									th:href="@{/actividades/ver/} + ${actividad.idActividad}"
+									th:text="${actividad.idActividad}"></a></td>
+								<td th:text="${actividad.nombreActividad}"></td>
+								<td th:text="${actividad.descripcion}"></td>
+								<td align="center"><a
+									th:href="@{/actividades/eliminar?id=}+${actividad.idActividad}"> 
+									<span class="glyphicon glyphicon-trash"></span></a></td>
+								<td align="center"><a
+									th:href="@{'/actividades/detalle/' + ${actividad.idActividad}}"><span
+										class="glyphicon glyphicon-edit"></span></a></td>
+							</tr>
+						</tbody>
+					</table>
+					<div th:if="${mensaje}" class="alert alert-info">
+						<p th:text="${mensaje}"></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>
+

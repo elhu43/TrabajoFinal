@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<meta charset="UTF-8"></meta>
+
+<body>
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container">
+		<div align="right">
+			<a style="border-bottom-color: green" th:href="@{/actividadeventos/nuevo}"
+				id="add-row" type="button" class="btn btn-warning">
+				<span class="glyphicon glyphicon-plus"></span> Nuevo
+			</a>
+		</div>
+		<div>
+			<form th:action="@{/actividadeventos/buscar}" method="post"
+				th:object="${actividadevento}">
+				<div class="form-group">
+
+					<label for="ae">Buscar:</label> <input type="text"
+						class="form-control" th:field="*{descripcion}" id="ae"></input>
+					<div align="right">
+						<button type="submit" class="btn btn-success">Aceptar</button>
+						<a href="/actividadeventos/listar" class="btn btn-danger">Cancelar</a>
+					</div>
+				</div>
+			</form>
+		</div>
+
+		<div class="card">
+			<div class="card-header text-white bg-primary mb-3">Reporte de
+				Eventos y Actividades</div>
+			<div class="card-body">
+
+				<div class="table-responsive">
+					<table class="table table-white">
+						<thead class="bg-primary mb-3 text-white">
+							<tr>
+								<th>Id</th>
+								<th>Evento</th>
+								<th>Actividad</th>
+								<th align="center">Operación</th>
+								<th align="center">Operación</th>
+							</tr>
+						</thead>
+						<tbody id="actividadevento-list">
+							<tr th:each="actividadevento:${listaActividadeventos}">
+								<td	th:text="${actividadevento.idAct}"></td>
+								<td th:text="${actividadevento.evento.nombreEvento}"></td>
+								<td th:text="${actividadevento.actividad.nombreActividad}"></td>
+								<td align="center"><a
+									th:href="@{/actividadeventos/eliminar?id=}+${actividadevento.idAct}">
+										<span class="glyphicon glyphicon-trash"></span>
+								</a></td>
+								<td align="center"><a
+									th:href="@{'/actividadeventos/modificar/' + ${actividadevento.idAct}}"><span
+										class="glyphicon glyphicon-edit"></span></a></td>
+							</tr>
+						</tbody>
+					</table>
+					<p th:text="${mensaje}"></p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<meta charset="UTF-8"></meta>
+
+<body>
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container">
+		<div align="right">
+			<a style="border-bottom-color: green" th:href="@{/usuarioeventos/nuevo}"
+				id="add-row" type="button" class="btn btn-warning">
+				<span class="glyphicon glyphicon-plus"></span> Nuevo
+			</a>
+		</div>
+		<div>
+			<form th:action="@{/usuarioeventos/buscar}" method="post"
+				th:object="${usuarioevento}">
+				<div class="form-group">
+
+					<label for="ae">Buscar:</label> <input type="text"
+						class="form-control" th:field="*{descripcion}" id="ue"></input>
+					<div align="right">
+						<button type="submit" class="btn btn-success">Aceptar</button>
+						<a href="/usuarioeventos/listar" class="btn btn-danger">Cancelar</a>
+					</div>
+				</div>
+			</form>
+		</div>
+
+		<div class="card">
+			<div class="card-header text-white bg-primary mb-3">Reporte de
+				Eventos y Usuarios</div>
+			<div class="card-body">
+
+				<div class="table-responsive">
+					<table class="table table-white">
+						<thead class="bg-primary mb-3 text-white">
+							<tr>
+								<th>Id</th>
+								<th>Evento</th>
+								<th>Usuario</th>
+								<th align="center">Operación</th>
+								<th align="center">Operación</th>
+							</tr>
+						</thead>
+						<tbody id="usuarioevento-list">
+							<tr th:each="usuarioevento:${listaUsuarioeventos}">
+								<td	th:text="${usuarioevento.idUsu}"></td>
+								<td th:text="${usuarioevento.evento.nombreEvento}"></td>
+								<td th:text="${usuarioevento.usuario.nombreUsuario}"></td>
+								<td align="center"><a
+									th:href="@{/usuarioeventos/eliminar?id=}+${usuarioevento.idUsu}">
+										<span class="glyphicon glyphicon-trash"></span>
+								</a></td>
+								<td align="center"><a
+									th:href="@{'/usuarioeventos/modificar/' + ${usuarioevento.idUsu}}"><span
+										class="glyphicon glyphicon-edit"></span></a></td>
+							</tr>
+						</tbody>
+					</table>
+					<p th:text="${mensaje}"></p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+
+</body>
+</html>
