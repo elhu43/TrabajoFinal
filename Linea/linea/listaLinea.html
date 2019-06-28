@@ -1,0 +1,73 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<meta charset="UTF-8"></meta>
+
+<body>
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container">
+		<div align="right">
+			<a th:href="@{/lineas/nuevo}"
+				id="add-row" type="button" class="btn btn-warning">Nuevo</a>
+		</div>
+		<div>
+			<form th:action="@{/lineas/buscar}" method="post"
+				th:object="${linea}">
+				<div class="form-group">
+
+					<label for="linea">Buscar:</label> <input type="text"
+						class="form-control" th:field="*{nombreLinea}" id="linea"></input>
+					<div align="right">
+						<button type="submit" class="btn btn-success">Aceptar</button>
+						<a href="/lineas/listar" class="btn btn-danger">Cancelar</a>
+					</div>
+				</div>
+
+			</form>
+
+		</div>
+
+		<div class="card">
+			<div class="card-header text-white bg-primary mb-3">Reporte de
+				Lineas</div>
+			<div class="card-body">
+
+				<div class="table-responsive">
+					<table class="table table-white">
+						<thead class="bg-primary mb-3 text-white">
+							<tr>
+								<th>Id</th>
+								<th>Linea</th>
+								<th>Descripcion</th>
+								<th align="center">Operación</th>
+								<th align="center">Operación</th>
+							</tr>
+						</thead>
+						<tbody id="linea-list">
+							<tr th:each="linea:${listaLineas}">
+								<td> <a class="btn btn-primary btn-xs"
+									th:href="@{/lineas/ver/} + ${linea.idLinea}"
+									th:text="${linea.idLinea}"></a></td>
+								<td th:text="${linea.nombreLinea}"></td>
+								<td th:text="${linea.descripcion}"></td>
+								<td align="center"><a
+									th:href="@{/lineas/eliminar?id=}+${linea.idLinea}"> 
+									<span class="glyphicon glyphicon-trash"></span></a></td>
+								<td align="center"><a
+									th:href="@{'/lineas/detalle/' + ${linea.idLinea}}"><span
+										class="glyphicon glyphicon-edit"></span></a></td>
+							</tr>
+						</tbody>
+					</table>
+					<div th:if="${mensaje}" class="alert alert-info">
+						<p th:text="${mensaje}"></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>
+
