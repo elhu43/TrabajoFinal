@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<meta charset="UTF-8"></meta>
+
+<body>
+	<header th:replace="layout/layout :: header"></header>
+	<div class="container">
+		<div class="card bg-light">
+			<div class="card-header text-black bg-blue">Registro de
+				Locales</div>
+			<form th:action="@{/locales/guardar}" th:object="${local}"
+				method="post">
+				<div class="form-group row">
+					<label for="idLocal" class="col-sm-2 col-form-label">Id</label>
+					<div class="col-sm-6">
+						<input type="text" th:field="*{idLocal}" class="form-control"/>
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label for="nombreLocal" class="col-sm-2 col-form-label">Local</label>
+					<div class="col-sm-6">
+						<input type="text" th:field="*{nombreLocal}" class="form-control"
+							th:errorclass="'form-control alert-info'" /> <small						
+							th:if="${#fields.hasErrors('nombreLocal')}"
+							th:errors="*{nombreLocal}"></small>
+					</div>
+				</div>
+				
+				<div class="form-group row">
+					<label for="distrito" class="col-sm-2 col-form-label">Distrito</label>
+					<div class="col-sm-6">
+						<input type="text" th:field="*{distrito}" class="form-control"
+							th:errorclass="'form-control alert-info'" /> <small						
+							th:if="${#fields.hasErrors('distrito')}"
+							th:errors="*{distrito}"></small>
+					</div>
+				</div>
+				
+				<div class="form-group row">
+					<label for="direccion" class="col-sm-2 col-form-label">Direccion</label>
+					<div class="col-sm-6">
+						<input type="text" th:field="*{direccion}" class="form-control"
+							th:errorclass="'form-control alert-info'" /> <small						
+							th:if="${#fields.hasErrors('direccion')}"
+							th:errors="*{direccion}"></small>
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<div class="col-sm-6" align="center">
+						<input type="submit" value="Registrar" class="btn btn-primary" />
+					
+						<a href="/locales/listar" class="btn btn-danger">Cancelar</a>
+					</div>
+				</div>
+				<p th:text="${mensaje}" class="form-text text-danger"></p>
+			</form>
+		</div>
+	</div>
+
+	<div th:if="${mensaje}" class="alert alert-info">
+		<p th:text="${mensaje}"></p>
+	</div>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>
